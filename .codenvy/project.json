@@ -1,0 +1,1 @@
+{"mixinTypes":[],"runners":{"configs":{"system:/javascript/web/simple":{"ram":0,"variables":{},"options":{}}},"default":"system:/javascript/web/simple"},"builders":{"configs":{}},"description":"A DurandalJS widget to provide a filebrowser","type":"BasicJS","attributes":{"language":["javascript"],"framework":["BasicJS"]}}
