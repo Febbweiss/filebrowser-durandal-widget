@@ -1,13 +1,15 @@
 <div class="row-fluid">
 	<aside class="col-md-3" id="filebrowser">
-    <div data-bind="widget: {kind:'filebrowser'}"></div>
-  </aside>
-  <main class="col-md-6" id="main">
-     <div class="scrollable" id="mainOutput">
-
-    </div>
-  </main> 
-  <aside class="col-md-3" id="helpPane">
-  
-  </aside>
+		<div data-bind="widget: {kind:'filebrowser'}"></div>
+	</aside>
+	
+	<main class="col-md-6" id="main">
+		<pre data-bind="visible: content">
+			<code data-bind="attr: {css: type}, text: content" id="editor"></code>
+		</pre>
+		<span class="text-center" data-bind="visible: !content()">Open file to view it.</span>
+	</main> 
+	
+	<aside class="col-md-3" id="helpPane">
+	</aside>
 </div>

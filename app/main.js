@@ -5,10 +5,11 @@ requirejs.config({
 		'plugins'				: '../lib/durandal/js/plugins',
 		'transitions'			: '../lib/durandal/js/transitions',
 		'knockout'				: '../lib/knockout.js/knockout',
-		'knockout.mapping'	: '../lib/bower-knockout-mapping/dist/knockout.mapping.min',
-		'knockout.validation': '../lib/knockout-validation/dist/knockout.validation.min',
-		'jquery'					: '../lib/jquery/jquery.min',
-		'perfect.scrollbar'	: '../lib/perfect-scrollbar/js/perfect-scrollbar.jquery'
+		'knockout.mapping'		: '../lib/bower-knockout-mapping/dist/knockout.mapping.min',
+		'knockout.validation'	: '../lib/knockout-validation/dist/knockout.validation.min',
+		'jquery'				: '../lib/jquery/jquery.min',
+		'perfect.scrollbar'		: '../lib/perfect-scrollbar/js/perfect-scrollbar.jquery',
+		'highlightjs'			: '../lib/highlightjs/highlight.pack'
 	},
 	shim: {
 		'knockout.mapping': {

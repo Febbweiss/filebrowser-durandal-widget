@@ -1,88 +1,147 @@
 {
-   "uuid":"folder1",
-   "name":"root",
+   "uuid":"workspace",
+   "name":"workspace",
    "type":"folder",
    "children":[
       {
-         "uuid":"docs",
-         "name":"docs",
+         "uuid":"app",
+         "name":"app",
          "type":"folder",
          "children":[
 		      {
-		         "uuid":"multimedia",
-		         "name":"multimedia",
+		         "uuid":"widgets",
+		         "name":"widgets",
 		         "type":"folder",
 		         "children":[
-		            {
-		               "name":"movie.mov",
-		               "uuid":"movie.mov",
-		               "type":"video",
-		               "extra":false
-		            },
-		            {
-		               "name":"icon.ico",
-		               "uuid":"icon.ico",
-		               "type":"image",
-		               "extra":false
-		            },
-		            {
-		               "name":"picture.png",
-		               "uuid":"picture.png",
-		               "type":"image",
-		               "extra":false
-		            }
+		         	{
+		         		"uuid":"filebrowser",
+		         		"name":"filebrowser",
+		         		"type":"folder",
+		         		"children": [
+			         		{
+				               "name":"newItemModal.html",
+				               "uuid":"newItemModalhtml",
+				               "type":"code",
+				               "extra":"html",
+				               "path": "/app/widgets/filebrowser/newItemModal.html"
+				            },
+			         		{
+				               "name":"newItemModal.js",
+				               "uuid":"newItemModaljs",
+				               "type":"code",
+				               "extra":"javascript",
+				               "path": "/app/widgets/filebrowser/newItemModal.js"
+				            },
+			         		{
+				               "name":"renameModal.html",
+				               "uuid":"renameModalhtml",
+				               "type":"code",
+				               "extra":"html",
+				               "path": "/app/widgets/filebrowser/renameModal.html"
+				            },
+			         		{
+				               "name":"renameModal.js",
+				               "uuid":"renameModaljs",
+				               "type":"code",
+				               "extra":"javascript",
+				               "path": "/app/widgets/filebrowser/renameModal.js"
+				            },
+			         		{
+				               "name":"view.html",
+				               "uuid":"viewhtml",
+				               "type":"code",
+				               "extra":"html",
+				               "path": "/app/widgets/filebrowser/view.html"
+				            },
+			         		{
+				               "name":"viewmodel.js",
+				               "uuid":"viewmodeljs",
+				               "type":"code",
+				               "extra":"javascript",
+				               "path": "/app/widgets/filebrowser/viewmodel.js"
+				            }
+		         		]
+		         	}
 		         ]
 		      },
+		      {
+	               "name":"main.js",
+	               "uuid":"mainjs",
+	               "type":"code",
+	               "extra":"javascript",
+				   "path": "/app/main.js"
+	            },
+	            {
+	               "name":"shell.html",
+	               "uuid":"shellhtml",
+	               "type":"code",
+	               "extra":"html",
+				   "path": "/app/shell.html"
+	            },
+	            {
+	               "name":"shell.js",
+	               "uuid":"shelljs",
+	               "type":"code",
+	               "extra":"javascript",
+				   "path": "/app/shell.js"
+	            }
+         ]
+      },
+      {
+         "uuid":"data",
+         "name":"data",
+         "type":"folder",
+         "children":[
             {
-               "name":"readme.txt",
-               "uuid":"readme.txt",
-               "type":"text",
-               "extra":false
-            },
-            {
-               "name":"slideshow.mov",
-               "uuid":"slideshow.mov",
-               "type":"video",
-               "extra":false
-            },
-            {
-               "name":"slideshow.ppt",
-               "uuid":"slideshow.ppt",
-               "type":"powerpoint",
-               "extra":false
-            },
-            {
-               "name":"slideshow.docx",
-               "uuid":"slideshow.docx",
-               "type":"word",
-               "extra":false
+               "name":"filesystem.json",
+               "uuid":"filesystemjson",
+               "type":"code",
+               "extra":"json",
+				"path": "/data/filesystem.json"
             }
          ]
       },
       {
-         "uuid":"structural",
-         "name":"structural",
-         "type":"folder",
-         "children":[
-            {
-               "name":"structure.json",
-               "uuid":"structure.json",
-               "type":"code",
-               "extra":"json"
-            },
-            {
-               "name":"structure.xml",
-               "uuid":"structure.xml",
-               "type":"code",
-               "extra":"xml"
-            },
-            {
-               "name":"structure.csv",
-               "uuid":"structure.csv",
-               "type":"code",
-               "extra":"csv"
-            }
-         ]
-      }
+      	"uuid": "style",
+      	"name": "style",
+      	"type": "folder",
+      	"children": [
+      		{
+      			"name": "filebrowser.less",
+      			"uuid": "filebrowserless",
+      			"type": "code",
+      			"extra": "less",
+				"path": "/style/filebrowser.less"
+      		},
+      		{
+      			"name": "starterkit.css",
+      			"uuid": "starterkitcss",
+      			"type": "code",
+      			"extra": "less",
+				"path": "/style/starterkit.css"
+      		}
+      	]
+      },
+      {
+	      "uuid": "bowerrc",
+	      "name": ".bowerrc",
+	      "type": "code",
+	      "extra": "json",
+	      "path": "/.bowerrc"
+	  },
+      {
+	      "uuid": "bowerjson",
+	      "name": "bower.json",
+	      "type": "code",
+	      "extra": "json",
+	      "path": "/bower.json"
+	  },
+      {
+	      "uuid": "indexhtml",
+	      "name": "index.html",
+	      "type": "code",
+	      "extra": "html",
+	      "path": "/index.html"
+	  }
    ]
 }

@@ -37,8 +37,15 @@ define(['durandal/app', 'durandal/composition', 'plugins/http',
     };
 
     ctor.prototype.openFile = function(object, event) {
-        console.log('File dblclick ', arguments);
+        var type = arguments[0].extra();
+        http.get(arguments[0].path()).then(function(response) {
+	        app.trigger('filebrowser:open_file', {
+	        	type: type,
+	        	content: response
+	        });
+	   });
     };
+    
     ctor.prototype.select = function(object, event) {
         if( !event.ctrlKey ) {
             $('li > span.select').removeClass('select');
@@ -72,7 +79,7 @@ define(['durandal/app', 'durandal/composition', 'plugins/http',
         posX = Math.min(posX - 45, windowWidth - menuWidth - 15);
         posY = Math.min(posY - 80, windowHeight - menuHeight - 10);
 
-        // affichage
+        // display
         contextMenu.css({
             left : posX + 'px',
             top : posY + 'px'
@@ -126,7 +133,6 @@ define(['durandal/app', 'durandal/composition', 'plugins/http',
     /** End of Context Menu */
 
   	http.get('/data/filesystem.json').then(function(response) {
-     	console.log(response);
         folder(ko.mapping.fromJS(response));
         $('#filebrowser').perfectScrollbar();
    });

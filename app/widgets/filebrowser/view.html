@@ -4,6 +4,7 @@
 			<ul data-bind="template: { name: 'tree-template', foreach: folder().children() }" class="tree-file"></ul>
 		<!-- /ko -->
 	<!-- /ko -->
+	<span data-bind="visible: !folder()" class="text-center">Loading workspace...</span>
 
 	<script id="tree-template" type="text/html">
 		<!-- ko if: $data.type() === "folder" -->
