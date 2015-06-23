@@ -11,3 +11,6 @@ This [Durandal](http://durandaljs.com/) widget allows to display a folder tree a
  * Create an item (in a folder)
  * Delete an item (and its components)
 	
+   
+**Licence**
+Source code is under [MIT Licence](http://opensource.org/licenses/mit-license.php) 
