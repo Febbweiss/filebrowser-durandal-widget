@@ -1,4 +1,6 @@
-# Welcome to the filebrowser Durandal widget demo
+# Durandal Filebrowser widget
+
+## What's this widget ?
 
 This [Durandal](http://durandaljs.com/) widget allows to display a folder tree and add some actions to manipulate this items :
 * A clic on a file or folder selects it
@@ -12,5 +14,6 @@ This [Durandal](http://durandaljs.com/) widget allows to display a folder tree a
  * Delete an item (and its components)
 	
    
-**Licence**
+#Licence
+
 Source code is under [MIT Licence](http://opensource.org/licenses/mit-license.php) 
