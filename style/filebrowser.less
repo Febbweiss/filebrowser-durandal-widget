@@ -1,8 +1,7 @@
 @import "../lib/lesshat/build/lesshat.less";
 
-.filebrowser {
+#filebrowser {
 	max-height: 500px;
-
 	
 	position: relative;
 	
@@ -10,8 +9,6 @@
 	white-space: nowrap;
 }
 
-//http://codepen.io/joshnh/pen/Hkqxu
-//http://codepen.io/tevko/pen/DdsnK
 .folder {
 	
 	& > label {
@@ -50,7 +47,8 @@ ul {
 };
 
 #fileBrowserContextMenu {
-	position: absolute;
+	position: fixed;
+  z-index: 9999;
 }
 
 .validationMessage {

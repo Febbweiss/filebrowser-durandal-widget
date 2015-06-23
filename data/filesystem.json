@@ -114,6 +114,13 @@
 				"path": "/style/filebrowser.less"
       		},
       		{
+      			"name": "global.less",
+      			"uuid": "globalless",
+      			"type": "code",
+      			"extra": "less",
+				"path": "/style/global.less"
+      		},
+      		{
       			"name": "starterkit.css",
       			"uuid": "starterkitcss",
       			"type": "code",

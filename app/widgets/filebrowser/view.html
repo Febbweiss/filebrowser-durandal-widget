@@ -1,29 +1,32 @@
-<div id="filebrowser" class="filebrowser">
-	<!-- ko if: folder() -->
+<div id="filebrowser">
+  <!-- ko if: folder() -->
 		<!-- ko let: { loopRoot: $data } -->
 			<ul data-bind="template: { name: 'tree-template', foreach: folder().children() }" class="tree-file"></ul>
 		<!-- /ko -->
 	<!-- /ko -->
-	<span data-bind="visible: !folder()" class="text-center">Loading workspace...</span>
 
 	<script id="tree-template" type="text/html">
 		<!-- ko if: $data.type() === "folder" -->
 			<li class="folder">
-				<i class="fa fa-folder-o" data-bind="attr: {id: 'icon_folder_' + $data.uuid()}"></i>
-				<span data-bind="text: $data.name, event: { dblclick: loopRoot.openFolder, contextmenu: loopRoot.openContextMenu, click: loopRoot.select }"/>
+				<span data-bind="event: { contextmenu: loopRoot.openContextMenu, dblclick: loopRoot.open, click: loopRoot.select }">
+					<i class="fa fa-folder-o" data-bind="attr: {id: 'icon_folder_' + $data.uuid()}"></i>
+					<!-- ko text: $data.name --><!-- /ko --> 
+				</span>
 				<input type="checkbox" data-bind="attr: {id: $data.uuid}" />
 				<ul data-bind="template: { name: 'tree-template', foreach: $data.children }"></ul>
 			</li>
 		<!-- /ko -->
 		<!--ko if: $data.type() !== "folder"-->
-			<li data-bind="attr: {'data-id': $data.uuid, 'data-filetype': $data.type()}" class="file">
+			<li data-bind="attr: {'data-id': $data.uuid, 'data-filetype': $data.type()}, 
+         					event: { contextmenu: loopRoot.openContextMenu, dblclick: loopRoot.open, click: loopRoot.select }" 
+         	 class="file">
 				<!--ko ifnot: $data.type -->
-				<i data-bind="attr: {class: 'fa fa-file-o'}"></i>
+					<i data-bind="attr: {class: 'fa fa-file-o'}"></i>
 				<!-- /ko -->
 				<!--ko if: $data.type -->
-				<i data-bind="attr: {class: 'fa fa-file-' + $data.type() + '-o', title: $data.type()}"></i>
+					<i data-bind="attr: {class: 'fa fa-file-' + $data.type() + '-o', title: $data.type()}"></i>
 				<!-- /ko -->
-				<span data-bind="text: $data.name, event: { dblclick: loopRoot.openFile, contextmenu: loopRoot.openContextMenu, click: loopRoot.select }, attr: {'data-extra': $data.extra ? $data.extra : ''}"></span>
+				<span data-bind="text: $data.name, attr: {'data-extra': $data.extra ? $data.extra : ''}"></span>
 			</li>
 		<!-- /ko -->
 	</script>    
@@ -31,16 +34,23 @@
 	<!-- Context menu -->
 	<div id="fileBrowserContextMenu" class="dropdown open" data-bind="visible: showContextMenu" tabindex="1">
 		<ul class="dropdown-menu" role="menu" aria-labelledby="contextMenu">
-			<!-- ko if: selected() != undefined && !selected().extra -->
-			<li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-bind="click: newItem">New ...</a></li>
-			<!-- /ko -->
-			<li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-bind="click: openRenamePopup">Rename</a></li>
-			<li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-bind="click: copy">Copy</a></li>
-			<!-- ko if: selected() != undefined && !selected().extra -->
-			<li role="presentation" data-bind="css: { 'disabled': !hasCopied()}"><a role="menuitem" tabindex="-1" href="#" data-bind="click: paste">Paste</a></li>
-			<!-- /ko -->
-			<li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-bind="click: openDeletePopup">Delete</a></li>
+			<li data-bind="visible: hasSelectedFolder()" >
+				<a role="menuitem" tabindex="-1" href="#" data-bind="click: newItem">New ...</a>
+			</li>
+			<li>
+				<a role="menuitem" tabindex="-1" href="#" data-bind="click: openRenamePopup">Rename</a>
+			</li>
+			<li>
+				<a role="menuitem" tabindex="-1" href="#" data-bind="click: copy">Copy</a>
+			</li>
+			<li data-bind="css: { 'disabled': !hasCopied()}, visible: hasSelectedFolder()">
+				<a role="menuitem" tabindex="-1" href="#" data-bind="click: paste">Paste</a>
+			</li>
+			<li>
+				<a role="menuitem" tabindex="-1" href="#" data-bind="click: openDeletePopup">Delete</a>
+			</li>
 		</ul>
 	</div>
+  
 	<!-- End of Context menu -->
 </div>

@@ -7,9 +7,9 @@
     "bower-knockout-mapping"	: "~2.5.0",
     "perfect-scrollbar"			: "~0.6.0",
     "bootstrap"					: "~3.3.4",
-    "fontawesome"				: "~4.3.0",
-    "less.js"					: "~2.4.0",
-    "lesshat"					: "~3.0.2",
-    "highlightjs"				: "~8.4.0"
+    "fontawesome"					: "~4.3.0",
+    "less.js"						: "~2.4.0",
+    "lesshat"						: "~3.0.2",
+    "highlightjs"					: "~8.4.0"
   }
 }

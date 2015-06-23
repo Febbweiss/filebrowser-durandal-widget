@@ -17,56 +17,61 @@ define(['durandal/app', 'durandal/composition', 'plugins/http',
 	};
 	ko.virtualElements.allowedBindings['let'] = true;
     
-    var ctor = function() { },
-        selected = ko.observableArray(),
-        showContextMenu = ko.observable(false),
+    var ctor = function() {},
+        selected = ko.observable(),
+        showContextMenu = ko.observable(),
         copied = ko.observable(undefined),
         folder = ko.observable(ko.mapping.fromJS({children: []})),
-        scrollable = $('#filebrowser'),
-        cachedData;
+        scrollable = $('#filebrowser');
 
+	ctor.prototype.attached = function() {
+     showContextMenu(false);
+		$('#filebrowser').perfectScrollbar();
+	};
+	
     ctor.prototype.activate = function(settings) {
         this.settings = settings;
-        this.selected = selected;
-        this.hasCopied = ko.computed( function() {
-           return copied() !== undefined;
-        });
-        this.showContextMenu = showContextMenu;
-        this.folder = folder;
-        scrollable.perfectScrollbar();
+		this.selected = selected;
+		this.folder = folder;
+		this.showContextMenu = showContextMenu;
+      this.hasSelectedFolder = ko.computed(function() {
+        return selected() != undefined && selected().type === 'folder';
+      });
+      this.hasCopied = ko.computed( function() {
+        return copied() !== undefined;
+      });
     };
 
-    ctor.prototype.openFile = function(object, event) {
-        var type = arguments[0].extra();
-        http.get(arguments[0].path()).then(function(response) {
-	        app.trigger('filebrowser:open_file', {
-	        	type: type,
-	        	content: response
-	        });
-	   });
+    ctor.prototype.open = function(object,event) {
+    	console.log('Opening', object);
+    	if( object.type() === 'folder' ) {
+	        var id = object.uuid(),
+	        	checkbox = $('input[type=checkbox][id=' + id + ']');
+	        	
+	        checkbox.prop('checked', !checkbox.prop('checked'));
+	        $('#icon_folder_' + id).toggleClass('fa-folder-o').toggleClass('fa-folder-open-o');
+	        
+	        $('#filebrowser').perfectScrollbar('update');
+		} else {
+ 			var type = object.extra();
+	        http.get(object.path()).then(function(response) {
+		        app.trigger('filebrowser:open_file', {
+		        	type: type,
+		        	content: response
+		        });
+		   });
+		}
     };
     
     ctor.prototype.select = function(object, event) {
-        if( !event.ctrlKey ) {
-            $('li > span.select').removeClass('select');
-            selected.removeAll();
-        }
+        $('li > span.select').removeClass('select');
         $(event.target).toggleClass('select');
-        selected.push( ko.mapping.fromJS(object) );
-    };
-    ctor.prototype.openFolder = function(event) {
-        var id = arguments[0].uuid();
-    	console.log('openFolder', id);
-        $('input[type=checkbox][id=' + id + ']').click();
-        $('#icon_folder_' + id).toggleClass('fa-folder-o').toggleClass('fa-folder-open-o');
-        $('#filebrowser').perfectScrollbar('update');
+        selected( ko.mapping.fromJS(object) );
     };
     
     /** Context Menu **/
 
     ctor.prototype.openContextMenu = function(object, event) {
-        console.log('openContextMenu');
-        selected( ko.mapping.fromJS(object) );
         // Position du menu, calculer la pos pour eviter sortie du viewport
         var posX = event.pageX,
             posY = event.pageY,
@@ -76,18 +81,19 @@ define(['durandal/app', 'durandal/composition', 'plugins/http',
             menuWidth = contextMenu.width(),
             menuHeight = contextMenu.height();
 
-        posX = Math.min(posX - 45, windowWidth - menuWidth - 15);
-        posY = Math.min(posY - 80, windowHeight - menuHeight - 10);
+			posX = Math.min(posX, windowWidth - menuWidth - 15);
+			posY = Math.min(posY, windowHeight - menuHeight - 10);
 
-        // display
+        // affichage
         contextMenu.css({
             left : posX + 'px',
             top : posY + 'px'
         });
 
-        showContextMenu(true);
+      
+       showContextMenu(true);
     };
-
+	
     ctor.prototype.openRenamePopup = function(ctor, event) {
         RenameModal.show(ctor.selected().name()).then(function(response) {
             if( response !== undefined ) {
@@ -127,14 +133,14 @@ define(['durandal/app', 'durandal/composition', 'plugins/http',
         });
     };
 
-    $(document).on('click', function() {
+   $(document).on('click', function() {
         showContextMenu(false);
     });
     /** End of Context Menu */
 
   	http.get('/data/filesystem.json').then(function(response) {
         folder(ko.mapping.fromJS(response));
-        $('#filebrowser').perfectScrollbar();
+        $('#filebrowser').perfectScrollbar('update');
    });
 
     return ctor;
